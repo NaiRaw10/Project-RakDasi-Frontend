@@ -66,6 +66,7 @@ export default function DaftarBuku({
                 key={book.id || index}
                 className="bg-white border border-blue-200/80 rounded-3xl p-5 flex gap-4 shadow-sm hover:shadow-md transition-all relative group"
               >
+                {/* Seluruh area gambar dan judul dibungkus Link agar bisa diklik */}
                 <Link
                   href={`/detailbooks?id=${book.id}`}
                   className="flex gap-4 flex-1 items-center cursor-pointer"
@@ -90,8 +91,10 @@ export default function DaftarBuku({
                   </div>
                 </Link>
 
+                {/* Tombol Hapus & Edit terpisah di sebelah kanan */}
                 <div className="flex flex-col justify-end gap-3 self-end z-10">
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       onDelete(book.id);
@@ -102,6 +105,7 @@ export default function DaftarBuku({
                     <Trash2 size={18} />
                   </button>
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       onOpenEditModal(book);
