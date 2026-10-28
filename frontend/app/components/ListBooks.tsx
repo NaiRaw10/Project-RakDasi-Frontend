@@ -1,5 +1,6 @@
 import { Plus } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Book {
   id?: number;
@@ -25,23 +26,24 @@ export default function ListBooks({ title, books }: ListBooksProps) {
       ) : (
         <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-200">
           {books.map((book, index) => (
-            <div 
-              key={book.id || index} 
-              className="w-48 flex-shrink-0 bg-[#EBF3FC]/60 border border-blue-100/60 rounded-2xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-md transition-all"
+            /* 2. Bungkus card dengan Link menggunakan backtick (`) */
+            <Link 
+              key={book.id || index}
+              href={`/detailbooks?id=${book.id}`}
+              className="w-48 flex-shrink-0 bg-[#EBF3FC]/60 border border-blue-100/60 rounded-2xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer group"
             >
-
               <div className="w-full h-60 relative rounded-xl overflow-hidden bg-white shadow-sm">
                 <Image
                   src={book.cover_url || "https://image.gramedia.net/rs:fit:0:0:f:webp/plain/https://cdn.gramedia.net/uploads/picture_meta/2023/10/25/qnyuvkkqd8n6wfhwldgi9.jpg"}
                   alt={book.title}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                   unoptimized
                 />
               </div>
 
               <div className="flex flex-col gap-1">
-                <h3 className="text-sm font-bold text-gray-800 truncate" title={book.title}>
+                <h3 className="text-sm font-bold text-gray-800 truncate group-hover:text-blue-600 transition-colors" title={book.title}>
                   {book.title}
                 </h3>
                 <span 
@@ -51,7 +53,7 @@ export default function ListBooks({ title, books }: ListBooksProps) {
                   {book.category}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
 
           <div className="w-16 flex-shrink-0 flex items-center justify-center">
