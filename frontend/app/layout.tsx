@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "RakDasi Web Library",
   icons: {
-    icon: "favicon.ico",
+    icon: "/favicon.ico",
   },
 };
 
