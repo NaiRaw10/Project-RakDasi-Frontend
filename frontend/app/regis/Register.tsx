@@ -162,7 +162,7 @@ export default function Register() {
             <div className="text-right text-xs text-gray-600 mt-1 mb-6">
               Sudah Punya Akun?{" "}
               <a
-                href="/login"
+                href="/logins"
                 className="font-semibold text-black hover:underline"
               >
                 Masuk
