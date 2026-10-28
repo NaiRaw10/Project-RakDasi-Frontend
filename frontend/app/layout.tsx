@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "RakDasi Web Library",
   icons: {
-    icon: "/favicon.ico", // Letakkan file gambarmu di dalam folder public
+    icon: "favicon.ico",
   },
 };
 
