@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
 
 interface Book {
   id: number;
@@ -18,18 +18,19 @@ interface Book {
 
 export default function DetailBuku() {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  const id = searchParams.get("id");
 
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
   useEffect(() => {
     if (!id) {
       setLoading(false);
-      setError('ID buku tidak ditemukan.');
+      setError("ID buku tidak ditemukan.");
       return;
     }
 
@@ -37,12 +38,12 @@ export default function DetailBuku() {
       try {
         const response = await fetch(`${API_URL}/books/${id}`);
         if (!response.ok) {
-          throw new Error('Gagal mengambil data detail buku dari server.');
+          throw new Error("Gagal mengambil data detail buku dari server.");
         }
         const result = await response.json();
-        setBook(result.data); // Mengambil dari bungkus properti "data" backend
+        setBook(result.data);
       } catch (err: any) {
-        setError(err.message || 'Terjadi kesalahan');
+        setError(err.message || "Terjadi kesalahan");
       } finally {
         setLoading(false);
       }
@@ -54,7 +55,9 @@ export default function DetailBuku() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <p className="text-gray-500 text-lg font-medium">Memuat detail buku...</p>
+        <p className="text-gray-500 text-lg font-medium">
+          Memuat detail buku...
+        </p>
       </div>
     );
   }
@@ -62,8 +65,13 @@ export default function DetailBuku() {
   if (error || !book) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-white">
-        <p className="text-red-500 text-lg font-medium mb-4">{error || 'Buku tidak ditemukan.'}</p>
-        <Link href="/" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
+        <p className="text-red-500 text-lg font-medium mb-4">
+          {error || "Buku tidak ditemukan."}
+        </p>
+        <Link
+          href="/"
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+        >
           Kembali ke Beranda
         </Link>
       </div>
@@ -71,7 +79,10 @@ export default function DetailBuku() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div
+      className="min-h-screen bg-white flex flex-col"
+      style={{ fontFamily: '"Macondo Swash Caps", cursive' }}
+    >
       <header className="w-full bg-[#61A3E2] px-8 py-5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-6">
           <Link
@@ -90,7 +101,10 @@ export default function DetailBuku() {
         <div className="flex flex-col md:flex-row gap-12 items-start">
           <div className="w-full md:w-[320px] h-[450px] relative rounded-3xl overflow-hidden shadow-lg border border-gray-100 flex-shrink-0 bg-gray-50">
             <Image
-              src={book.cover_url || "https://image.gramedia.net/rs:fit:0:0:f:webp/plain/https://cdn.gramedia.net/uploads/picture_meta/2023/10/25/qnyuvkkqd8n6wfhwldgi9.jpg"}
+              src={
+                book.cover_url ||
+                "https://image.gramedia.net/rs:fit:0:0:f:webp/plain/https://cdn.gramedia.net/uploads/picture_meta/2023/10/25/qnyuvkkqd8n6wfhwldgi9.jpg"
+              }
               alt={book.title}
               fill
               className="object-cover"
@@ -105,8 +119,8 @@ export default function DetailBuku() {
 
             <div className="flex flex-col gap-2">
               <h2 className="text-xl font-bold text-gray-900">Description</h2>
-              <p className="text-gray-600 leading-relaxed text-base">
-                {book.description || 'Deskripsi belum tersedia.'}
+              <p className="text-gray-600 leading-relaxed text-base text-justify">
+                {book.description || "Deskripsi belum tersedia."}
               </p>
             </div>
 
@@ -115,15 +129,21 @@ export default function DetailBuku() {
               <div className="grid grid-cols-3 gap-8 max-w-lg">
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Author</p>
-                  <p className="font-semibold text-gray-800">{book.author || '-'}</p>
+                  <p className="font-semibold text-gray-800">
+                    {book.author || "-"}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Page</p>
-                  <p className="font-semibold text-gray-800">{book.page || '-'}</p>
+                  <p className="font-semibold text-gray-800">
+                    {book.page || "-"}
+                  </p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 mb-1">Category</p>
-                  <p className="font-semibold text-gray-800">{book.category || '-'}</p>
+                  <p className="font-semibold text-gray-800">
+                    {book.category || "-"}
+                  </p>
                 </div>
               </div>
             </div>
