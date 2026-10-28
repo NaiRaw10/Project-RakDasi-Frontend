@@ -16,17 +16,17 @@ interface DaftarBukuProps {
   loading: boolean;
   error: string;
   onDelete: (id?: number) => void;
-  onOpenAddModal: () => void;
-  onOpenEditModal: (book: Book) => void;
+  onOpenAddModal: () => void; 
+  onOpenEditModal: (book: Book) => void; 
 }
 
-export default function DaftarBuku({
-  books,
-  loading,
-  error,
-  onDelete,
-  onOpenAddModal,
-  onOpenEditModal,
+export default function DaftarBuku({ 
+  books, 
+  loading, 
+  error, 
+  onDelete, 
+  onOpenAddModal, 
+  onOpenEditModal 
 }: DaftarBukuProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -43,6 +43,7 @@ export default function DaftarBuku({
       </header>
 
       <main className="flex-1 px-10 py-8 flex flex-col gap-8 max-w-8xl mx-auto w-full">
+        
         <div className="w-fit">
           <button
             onClick={onOpenAddModal}
@@ -52,11 +53,7 @@ export default function DaftarBuku({
           </button>
         </div>
 
-        {loading && (
-          <p className="text-gray-500 text-center py-6">
-            Memuat daftar buku...
-          </p>
-        )}
+        {loading && <p className="text-gray-500 text-center py-6">Memuat daftar buku...</p>}
         {error && <p className="text-red-500 text-center py-6">{error}</p>}
 
         {!loading && !error && (
@@ -64,57 +61,39 @@ export default function DaftarBuku({
             {books.map((book, index) => (
               <div
                 key={book.id || index}
-                className="bg-white border border-blue-200/80 rounded-3xl p-5 flex gap-4 shadow-sm hover:shadow-md transition-all relative group"
+                className="bg-white border border-blue-200/80 rounded-3xl p-5 flex gap-4 shadow-sm hover:shadow-md transition-all relative"
               >
-                {/* Seluruh area gambar dan judul dibungkus Link agar bisa diklik */}
-                <Link
-                  href={`/detailbooks?id=${book.id}`}
-                  className="flex gap-4 flex-1 items-center cursor-pointer"
-                >
-                  <div className="w-32 h-44 relative rounded-2xl overflow-hidden bg-blue-50 flex-shrink-0 shadow-inner">
-                    <Image
-                      src={
-                        book.cover_url ||
-                        "https://image.gramedia.net/rs:fit:0:0:f:webp/plain/https://cdn.gramedia.net/uploads/picture_meta/2023/10/25/qnyuvkkqd8n6wfhwldgi9.jpg"
-                      }
-                      alt={book.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      unoptimized
-                    />
-                  </div>
+                <div className="w-32 h-44 relative rounded-2xl overflow-hidden bg-blue-50 flex-shrink-0 shadow-inner">
+                  <Image
+                    src={book.cover_url || "https://image.gramedia.net/rs:fit:0:0:f:webp/plain/https://cdn.gramedia.net/uploads/picture_meta/2023/10/25/qnyuvkkqd8n6wfhwldgi9.jpg"}
+                    alt={book.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                </div>
 
-                  <div className="flex-1 flex flex-col justify-between py-1">
-                    <h3 className="text-base font-bold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition-colors">
-                      {book.title}
-                    </h3>
-                  </div>
-                </Link>
+                <div className="flex-1 flex flex-col justify-between py-1">
+                  <h3 className="text-base font-bold text-gray-800 line-clamp-2">
+                    {book.title}
+                  </h3>
 
-                {/* Tombol Hapus & Edit terpisah di sebelah kanan */}
-                <div className="flex flex-col justify-end gap-3 self-end z-10">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDelete(book.id);
-                    }}
-                    className="w-10 h-10 rounded-full bg-[#FF6B6B] flex items-center justify-center text-white shadow-sm hover:opacity-90 transition-all cursor-pointer"
-                    title="Hapus Buku"
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onOpenEditModal(book);
-                    }}
-                    className="w-10 h-10 rounded-full bg-[#C4D664] flex items-center justify-center text-gray-900 shadow-sm hover:opacity-90 transition-all cursor-pointer"
-                    title="Edit Buku"
-                  >
-                    <Pencil size={18} />
-                  </button>
+                  <div className="flex items-center justify-end gap-3 self-end">
+                    <button
+                      onClick={() => onDelete(book.id)}
+                      className="w-10 h-10 rounded-full bg-[#FF6B6B] flex items-center justify-center text-white shadow-sm hover:opacity-90 transition-all cursor-pointer"
+                      title="Hapus Buku"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                    <button
+                      onClick={() => onOpenEditModal(book)}
+                      className="w-10 h-10 rounded-full bg-[#C4D664] flex items-center justify-center text-gray-900 shadow-sm hover:opacity-90 transition-all cursor-pointer"
+                      title="Edit Buku"
+                    >
+                      <Pencil size={18} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
