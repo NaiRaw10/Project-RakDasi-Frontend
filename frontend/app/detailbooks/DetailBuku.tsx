@@ -79,12 +79,12 @@ export default function DetailBuku() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-white flex flex-col"
-      style={{ fontFamily: '"Macondo Swash Caps", cursive' }}
-    >
+    <div className="min-h-screen bg-white flex flex-col">
       <header className="w-full bg-[#61A3E2] px-8 py-5 flex items-center justify-between shadow-sm">
-        <div className="flex items-center gap-6">
+        <div
+          className="flex items-center gap-6"
+          style={{ fontFamily: '"Macondo Swash Caps", cursive' }}
+        >
           <Link
             href="/"
             className="w-10 h-10 rounded-full bg-[#C4D664] flex items-center justify-center text-gray-800 shadow-sm hover:opacity-90 transition-all cursor-pointer"
